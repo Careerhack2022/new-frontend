@@ -103,7 +103,7 @@ function Analysis() {
     var i =0;
 
     for( i =0;i<=143;i++){
-        electricity +=demo_day[i]['pot']+demo_day[i]['purifier_white']+demo_day[i]['purifier_black']+demo_day[i]['purifier_small']+demo_day[i]['heater']+demo_day[i]['dryer']
+        electricity=demo_day[i]['pot']+demo_day[i]['purifier_white']+demo_day[i]['purifier_black']+demo_day[i]['purifier_small']+demo_day[i]['heater']+demo_day[i]['dryer']
         data.push([demo_day[i]['timestamp'],electricity.toFixed(2)]);
         
     }

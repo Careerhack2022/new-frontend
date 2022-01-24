@@ -172,7 +172,7 @@ body {
   .ant-menu-item
   .active
   .icon {
-  background-color: #1890ff;
+  background-color: #8edd44;
 }
 .layout-dashboard
   .ant-layout-sider.sider-primary
@@ -966,7 +966,7 @@ button.ant-btn.bell strong {
   width: 48px;
   height: 48px;
   text-align: center;
-  background: #1890ff;
+  background: #18f3d6;
   color: #fff;
   border-radius: 0.5rem;
   margin-left: auto;
@@ -983,7 +983,7 @@ button.ant-btn.bell strong {
 }
 .bar-chart {
   background: transparent
-    linear-gradient(62deg, #00369e 0%, #005cfd 53%, #a18dff 100%) 0% 0%
+    linear-gradient(62deg, #23992d 0%, #68ec64 53%, #fffd73 100%) 0% 0%
     no-repeat padding-box;
   box-shadow: 0px 4px 6px #0000001f;
 

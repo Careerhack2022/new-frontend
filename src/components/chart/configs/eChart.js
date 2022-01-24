@@ -39,15 +39,12 @@ const eChart = {
     },
     xaxis: {
       categories: [
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        'pot',
+        'purifier_white',
+        'purifier_black',
+        'purifier_small',
+        'heater',
+        'dryer',
       ],
       labels: {
         show: true,
@@ -96,7 +93,7 @@ const eChart = {
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$ " + val + " thousands";
+          return " " + val + " Wattages";
         },
       },
     },

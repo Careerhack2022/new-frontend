@@ -1,20 +1,11 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+
 import { useState } from "react";
 
 import {
   Card,
   Col,
   Row,
+  Table,
   Typography,
   Tooltip,
   Progress,
@@ -45,14 +36,66 @@ import team2 from "../assets/images/team-2.jpg";
 import team3 from "../assets/images/team-3.jpg";
 import team4 from "../assets/images/team-4.jpg";
 import card from "../assets/images/info-card-1.jpg";
-
+import {useEffect} from 'react';
+import { getDeviceDataAll, getDeviceDataOne } from '../components/api/device';
 function Home() {
   const { Title, Text } = Typography;
 
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [reverse, setReverse] = useState(false);
-
+  const [demo_day,setDemoData]=useState(null);
+  const [priority_list,setPriority] = useState(null);
+  const [seconds,setSeconds] =useState(null);
+  useEffect(() => {
+    getDeviceDataAll("demo_day").then(res => {
+      setDemoData(res.data);
+      // console.log("data[0]", res.data[0])
+      let temp = {
+        "dryer": res.data[0]["dryer_priority"],
+        "heater": res.data[0]["heater_priority"],
+        "pot": res.data[0]["pot_priority"],
+        "purifier_black": res.data[0]["purifier_black_priority"],
+        "purifier_small": res.data[0]["purifier_small_priority"],
+        "purifier_white": res.data[0]["purifier_white_priority"],
+      }
+      setPriority(temp);
+    });
+  }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+        
+      setSeconds(seconds => seconds + 1);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
+  var data = [];
+  var electricity = 0;
+  var bill = 0;
+  data.push([
+    'x', 'Pot', 'Purifier White','Purifier Black','Purifier Small','Heater','Dryer'
+    
+  ]);
+  if(demo_day===null){
+    data.push(['2022-01-24 00:00:00','0','0','0','0','0']);
+  }
+  else{
+    var range = seconds;
+    if(range>=144) range = 143;
+    var i =0;
+    for( i =0;i<=range;i++){
+        data.push([demo_day[i]['timestamp'],demo_day[i]['pot'],demo_day[i]['purifier_white'],demo_day[i]['purifier_black'],demo_day[i]['purifier_small'],demo_day[i]['heater'],demo_day[i]['dryer']])
+        electricity += demo_day[i]['pot']+demo_day[i]['purifier_white']+demo_day[i]['purifier_black']+demo_day[i]['purifier_small']+demo_day[i]['heater']+demo_day[i]['dryer'];
+    }
+    var time = i*10/60;
+    
+  }
+  electricity = electricity.toFixed(2);
+  bill = electricity/1000*5;
+  bill = bill.toFixed(2);
+  var con =(electricity/time);
+  con = con.toFixed(2);
   const dollor = [
     <svg
       width="22"
@@ -78,6 +121,7 @@ function Home() {
       ></path>
     </svg>,
   ];
+  // linear-gradient(62deg, #23992d 0%, #68ec64 53%, #fffd73 100%) 0% 0%
   const profile = [
     <svg
       width="22"
@@ -122,51 +166,89 @@ function Home() {
       ></path>
     </svg>,
   ];
-  const cart = [
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key={0}
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M10 2C7.79086 2 6 3.79086 6 6V7H5C4.49046 7 4.06239 7.38314 4.00612 7.88957L3.00612 16.8896C2.97471 17.1723 3.06518 17.455 3.25488 17.6669C3.44458 17.8789 3.71556 18 4 18H16C16.2844 18 16.5554 17.8789 16.7451 17.6669C16.9348 17.455 17.0253 17.1723 16.9939 16.8896L15.9939 7.88957C15.9376 7.38314 15.5096 7 15 7H14V6C14 3.79086 12.2091 2 10 2ZM12 7V6C12 4.89543 11.1046 4 10 4C8.89543 4 8 4.89543 8 6V7H12ZM6 10C6 9.44772 6.44772 9 7 9C7.55228 9 8 9.44772 8 10C8 10.5523 7.55228 11 7 11C6.44772 11 6 10.5523 6 10ZM13 9C12.4477 9 12 9.44772 12 10C12 10.5523 12.4477 11 13 11C13.5523 11 14 10.5523 14 10C14 9.44772 13.5523 9 13 9Z"
-        fill="#fff"
-      ></path>
-    </svg>,
-  ];
+  
   const count = [
     {
-      today: "Today’s Sales",
-      title: "$53,000",
-      persent: "+30%",
+      today: "Electricity Bill",
+      title:  bill.toString(),
+      persent: "dollars",
       icon: dollor,
       bnb: "bnb2",
     },
     {
-      today: "Today’s Users",
-      title: "3,200",
-      persent: "+20%",
+      today: "Power Accumulation",
+      title: electricity.toString(),
+      persent: "Wattage",
       icon: profile,
       bnb: "bnb2",
     },
     {
-      today: "New Clients",
-      title: "+1,200",
-      persent: "-20%",
+      today: "Average Consumption",
+      title: con.toString() ,
+      persent: "/hr",
       icon: heart,
       bnb: "redtext",
     },
+    
+  ];
+  var dataproject =[]
+  if(priority_list!=null){
+    dataproject = [
+      {
+        key:"1",
+        priority:(
+          <div className="semibold">Priority</div>
+        ),
+        pot:(
+          <div className="semibold">{priority_list['pot']}</div>
+        ),
+        pw:(
+          <div className="semibold">{priority_list['purifier_white']}</div>
+        ),
+        pb:(
+          <div className="semibold">{priority_list['purifier_black']}</div>
+        ),
+        ps:(
+          <div className="semibold">{priority_list['purifier_small']}</div>
+        ),
+        dryer:(
+          <div className="semibold">{priority_list['dryer']}</div>
+        ),
+        heater:(
+          <div className="semibold">{priority_list['heater']}</div>
+        ),
+      }
+    ];
+  }
+  
+  const project = [
     {
-      today: "New Orders",
-      title: "$13,200",
-      persent: "10%",
-      icon: cart,
-      bnb: "bnb2",
+      title: "Device",
+      dataIndex: "priority",
+    },
+    {
+      title: "POT",
+      dataIndex: "pot",
+    },
+    {
+      title: "PURIFIER-WHITE",
+      dataIndex: "pw",
+    },
+    {
+      title: "PURIFIER-BLACK",
+      dataIndex: "pb",
+    },
+    {
+      title: "PURIFIER-SMALL",
+      dataIndex: "ps",
+    },
+    {
+      title: "DRYER",
+      dataIndex: "dryer",
+    },
+    {
+      title: "HEATER",
+      dataIndex: "heater",
     },
   ];
 
@@ -292,53 +374,9 @@ function Home() {
     },
   ];
 
-  const timelineList = [
-    {
-      title: "$2,400 - Redesign store",
-      time: "09 JUN 7:20 PM",
-      color: "green",
-    },
-    {
-      title: "New order #3654323",
-      time: "08 JUN 12:20 PM",
-      color: "green",
-    },
-    {
-      title: "Company server payments",
-      time: "04 JUN 3:10 PM",
-    },
-    {
-      title: "New card added for order #4826321",
-      time: "02 JUN 2:45 PM",
-    },
-    {
-      title: "Unlock folders for development",
-      time: "18 MAY 1:30 PM",
-    },
-    {
-      title: "New order #46282344",
-      time: "14 MAY 3:30 PM",
-      color: "gray",
-    },
-  ];
+  
 
-  const uploadProps = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+  
 
   return (
     <>
@@ -349,9 +387,9 @@ function Home() {
               key={index}
               xs={24}
               sm={24}
-              md={12}
-              lg={6}
-              xl={6}
+              md={8}
+              lg={8}
+              xl={8}
               className="mb-24"
             >
               <Card bordered={false} className="criclebox ">
@@ -385,8 +423,17 @@ function Home() {
             </Card>
           </Col>
         </Row>
-
-        <Row gutter={[24, 0]}>
+        <Row gutter={[24,0]}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} className="mb-24">
+              {(priority_list!=null)?(<Table
+                  columns={project}
+                  dataSource={dataproject}
+                  pagination={false}
+                  className="ant-border-space"
+                />):(<></>)}
+            </Col>
+        </Row>
+        {/* <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={16} className="mb-24">
             <Card bordered={false} className="criclebox cardbody h-full">
               <div className="project-ant">
@@ -486,11 +533,11 @@ function Home() {
               </div>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
         <Row gutter={[24, 0]}>
           <Col xs={24} md={12} sm={24} lg={12} xl={14} className="mb-24">
-            <Card bordered={false} className="criclebox h-full">
+            {/* <Card bordered={false} className="criclebox h-full">
               <Row gutter>
                 <Col
                   xs={24}
@@ -550,7 +597,7 @@ function Home() {
                   </a>
                 </div>
               </div>
-            </Card>
+            </Card> */}
           </Col>
         </Row>
       </div>

@@ -181,7 +181,7 @@ function LineChart() {
         className="full-width"
         options={options}
         series={drawing}
-        type="area"
+        type="line"
         height={350}
         width={"100%"}
       />

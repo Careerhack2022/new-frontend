@@ -1,30 +1,14 @@
-
-
-
 import ReactApexChart from "react-apexcharts";
 import { Typography } from "antd";
-import { MinusOutlined } from "@ant-design/icons";
 import {useEffect,useState} from 'react';
-import { getDeviceDataAll, getDeviceDataOne } from '../api/device';
+import { getDeviceDataAll} from '../api/device';
 function LineChart() {
-  var electricity = 0;
   const { Title, Paragraph } = Typography;
   const [demo_day,setDemoData]=useState(null);
-  const [priority_list,setPriority] = useState(null);
   const [seconds,setSeconds] =useState(1);
   useEffect(() => {
     getDeviceDataAll("demo_day").then(res => {
       setDemoData(res.data);
-      // console.log("data[0]", res.data[0])
-      let temp = {
-        "dryer": res.data[0]["dryer_priority"],
-        "heater": res.data[0]["heater_priority"],
-        "pot": res.data[0]["pot_priority"],
-        "purifier_black": res.data[0]["purifier_black_priority"],
-        "purifier_small": res.data[0]["purifier_small_priority"],
-        "purifier_white": res.data[0]["purifier_white_priority"],
-      }
-      setPriority(temp);
     });
   }, []);
   useEffect(() => {
@@ -64,12 +48,12 @@ function LineChart() {
   var d = {'timestamp':[],'pot':[],'purifier_white':[],'purifier_black':[],'purifier_small':[],'heater':[],'dryer':[]};
   for(i = 0;i<data.length;i++){
     d['timestamp'].push(data[i][0].toFixed);
-    d['pot'].push(data[i][1]);
-    d['purifier_white'].push(data[i][2]);
-    d['purifier_black'].push(data[i][3]);
-    d['purifier_small'].push(data[i][4]);
-    d['heater'].push(data[i][5]);
-    d['dryer'].push(data[i][6]);
+    d['pot'].push(Math.round(data[i][1] * 100) / 100);
+    d['purifier_white'].push(Math.round(data[i][2] * 100) / 100);
+    d['purifier_black'].push(Math.round(data[i][3] * 100) / 100);
+    d['purifier_small'].push(Math.round(data[i][4] * 100) / 100);
+    d['heater'].push(Math.round(data[i][5] * 100) / 100);
+    d['dryer'].push(Math.round(data[i][6] * 100) / 100);
   }
   var drawing = [
     {

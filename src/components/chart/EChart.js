@@ -1,28 +1,17 @@
 
 
 import ReactApexChart from "react-apexcharts";
-import { Row, Col, Typography } from "antd";
+import { Typography } from "antd";
 import {useEffect,useState} from 'react';
-import { getDeviceDataAll, getDeviceDataOne } from '../api/device';
+import { getDeviceDataAll} from '../api/device';
 
 function EChart() {
   const { Title, Paragraph } = Typography;
   const [demo_day,setDemoData]=useState(null);
-  const [priority_list,setPriority] = useState(null);
   const [seconds,setSeconds] =useState(null);
   useEffect(() => {
     getDeviceDataAll("demo_day").then(res => {
       setDemoData(res.data);
-      // console.log("data[0]", res.data[0])
-      let temp = {
-        "dryer": res.data[0]["dryer_priority"],
-        "heater": res.data[0]["heater_priority"],
-        "pot": res.data[0]["pot_priority"],
-        "purifier_black": res.data[0]["purifier_black_priority"],
-        "purifier_small": res.data[0]["purifier_small_priority"],
-        "purifier_white": res.data[0]["purifier_white_priority"],
-      }
-      setPriority(temp);
     });
   }, []);
   useEffect(() => {
@@ -52,19 +41,14 @@ function EChart() {
   }
   var d = {'timestamp':0,'pot':0,'purifier_white':0,'purifier_black':0,'purifier_small':0,'heater':0,'dryer':0};
   for(i = 1;i<data.length;i++){
-    d['pot']+=data[i][1];
-    d['purifier_white']+=data[i][2];
-    d['purifier_black']+=data[i][3];
-    d['purifier_small']+=data[i][4];
-    d['heater']+=data[i][5];
-    d['dryer']+=data[i][6];
+    d['pot']+=Math.round(data[i][1] * 100) / 100;
+    d['purifier_white']+=Math.round(data[i][2] * 100) / 100;
+    d['purifier_black']+=Math.round(data[i][3] * 100) / 100;
+    d['purifier_small']+=Math.round(data[i][4] * 100) / 100;
+    d['heater']+=Math.round(data[i][5] * 100) / 100;
+    d['dryer']+=Math.round(data[i][6] * 100) / 100;
   }
-  // d['pot'] = d['pot'].toFixed(2);
-  // d['purifier_white']= d['purifier_white'].toFixed(2);
-  // d['purifier_black']=d['purifier_black'].toFixed(2);
-  // d['purifier_small']=d['purifier_small'].toFixed(2);
-  // d['dryer']=d['dryer'].toFixed(2);
-  // d['heater']=d['heater'].toFixed(2);
+
   const series = [
     {
       name: "Electricity",
@@ -72,24 +56,7 @@ function EChart() {
       color: "#fff",
     },
   ]
-  const items = [
-    {
-      Title: "3,6K",
-      user: "Users",
-    },
-    {
-      Title: "2m",
-      user: "Clicks",
-    },
-    {
-      Title: "$772",
-      user: "Sales",
-    },
-    {
-      Title: "82",
-      user: "Items",
-    },
-  ];
+
   const option =  {
     chart: {
       type: "bar",

@@ -36,7 +36,7 @@ function LineChart() {
     return () => clearInterval(interval);
   }, []);
 
-  console.log('data',demo_day);
+  // console.log('data',demo_day);
   var data = [];
   data.push([
     'x', 'Pot', 'Purifier White','Purifier Black','Purifier Small','Heater','Dryer'
@@ -55,7 +55,7 @@ function LineChart() {
     }
   }
   else{
-    for(var i =0;i<143;i++){
+    for(i =0;i<143;i++){
       data.push([demo_day[i]['timestamp'],demo_day[i]['pot'],demo_day[i]['purifier_white'],demo_day[i]['purifier_black'],demo_day[i]['purifier_small'],demo_day[i]['heater'],demo_day[i]['dryer']])
       
   }
@@ -68,8 +68,8 @@ function LineChart() {
     d['purifier_white'].push(data[i][2]);
     d['purifier_black'].push(data[i][3]);
     d['purifier_small'].push(data[i][4]);
-    d['dryer'].push(data[i][5]);
-    d['heater'].push(data[i][6]);
+    d['heater'].push(data[i][5]);
+    d['dryer'].push(data[i][6]);
   }
   var drawing = [
     {
@@ -98,7 +98,7 @@ function LineChart() {
       data:d['purifier_small'],
     },
     {
-      name:'heater',
+      name:'dryer',
       offsetY:0,
       data:d['dryer'],
     },

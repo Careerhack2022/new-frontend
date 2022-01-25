@@ -25,6 +25,7 @@ import Paragraph from "antd/lib/typography/Paragraph";
 import Echart from "../components/chart/EChart";
 import LineChart from "../components/chart/LineChart";
 
+// import pow1 from 
 import ava1 from "../assets/images/logo-shopify.svg";
 import ava2 from "../assets/images/logo-atlassian.svg";
 import ava3 from "../assets/images/logo-slack.svg";
@@ -126,45 +127,35 @@ function Home() {
     <svg
       width="22"
       height="22"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 360 360"
+      // fill="none"
       key={0}
-    >
-      <path
-        d="M9 6C9 7.65685 7.65685 9 6 9C4.34315 9 3 7.65685 3 6C3 4.34315 4.34315 3 6 3C7.65685 3 9 4.34315 9 6Z"
-        fill="#fff"
-      ></path>
-      <path
-        d="M17 6C17 7.65685 15.6569 9 14 9C12.3431 9 11 7.65685 11 6C11 4.34315 12.3431 3 14 3C15.6569 3 17 4.34315 17 6Z"
-        fill="#fff"
-      ></path>
-      <path
-        d="M12.9291 17C12.9758 16.6734 13 16.3395 13 16C13 14.3648 12.4393 12.8606 11.4998 11.6691C12.2352 11.2435 13.0892 11 14 11C16.7614 11 19 13.2386 19 16V17H12.9291Z"
-        fill="#fff"
-      ></path>
-      <path
-        d="M6 11C8.76142 11 11 13.2386 11 16V17H1V16C1 13.2386 3.23858 11 6 11Z"
-        fill="#fff"
-      ></path>
-    </svg>,
+      enableBackground="new 0 0 360 360" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnscc="http://web.resource.org/cc/" xmlnsdc="http://purl.org/dc/elements/1.1/" xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<path d="m265.57 72.483c-7.646-4.394-17.355-2.01-21.575 5.297-4.217 7.307-1.925 16.547 5.095 20.536l5.813 4.406c29.892 22.655 49.207 58.524 49.207 98.923 0 68.543-55.565 124.11-124.11 124.11-68.543 0-124.11-55.566-124.11-124.11 0-39.822 18.771-75.242 47.934-97.944l6.177-4.809c7.521-4.306 10.222-13.806 6.003-21.112s-13.923-9.693-21.566-5.303l-6.408 4.742c-38.083 28.184-62.784 73.409-62.784 124.43-4e-3 85.46 69.282 154.75 154.75 154.75s154.75-69.287 154.75-154.76c0-51.011-24.696-96.232-62.772-124.42l-6.41-4.737z"/>
+	<path d="m195.32 162.49c0 9.103-6.895 16.549-15.323 16.549s-15.324-7.446-15.324-16.549v-142.34c0-9.102 6.896-16.549 15.324-16.549 8.429 0 15.323 7.447 15.323 16.549v142.34z"/>
+      {/* <metadata><rdf:RDF><cc:Work><dc:format>image/svg+xml</dc:format><dc:type rdfResource="http://purl.org/dc/dcmitype/StillImage" /><cc:license rdfResource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:publisher><cc:Agent rdfAbout="http://openclipart.org/"><dc:title>Openclipart</dc:title></cc:Agent></dc:publisher></cc:Work>
+        <cc:License rdfAbout="http://creativecommons.org/licenses/publicdomain/"><cc:permits rdfResource="http://creativecommons.org/ns#Reproduction" />
+          <cc:permits rdfResource="http://creativecommons.org/ns#Distribution" /><cc:permits rdfResource="http://creativecommons.org/ns#DerivativeWorks" />
+  </cc:License></rdf:RDF></metadata> */}
+        </svg>
   ];
   const heart = [
-    <svg
+     <svg
       width="22"
       height="22"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 360 360"
+      // fill="none"
       key={0}
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M3.17157 5.17157C4.73367 3.60948 7.26633 3.60948 8.82843 5.17157L10 6.34315L11.1716 5.17157C12.7337 3.60948 15.2663 3.60948 16.8284 5.17157C18.3905 6.73367 18.3905 9.26633 16.8284 10.8284L10 17.6569L3.17157 10.8284C1.60948 9.26633 1.60948 6.73367 3.17157 5.17157Z"
-        fill="#fff"
-      ></path>
-    </svg>,
+      enableBackground="new 0 0 360 360" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnscc="http://web.resource.org/cc/" xmlnsdc="http://purl.org/dc/elements/1.1/" xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<path d="m265.57 72.483c-7.646-4.394-17.355-2.01-21.575 5.297-4.217 7.307-1.925 16.547 5.095 20.536l5.813 4.406c29.892 22.655 49.207 58.524 49.207 98.923 0 68.543-55.565 124.11-124.11 124.11-68.543 0-124.11-55.566-124.11-124.11 0-39.822 18.771-75.242 47.934-97.944l6.177-4.809c7.521-4.306 10.222-13.806 6.003-21.112s-13.923-9.693-21.566-5.303l-6.408 4.742c-38.083 28.184-62.784 73.409-62.784 124.43-4e-3 85.46 69.282 154.75 154.75 154.75s154.75-69.287 154.75-154.76c0-51.011-24.696-96.232-62.772-124.42l-6.41-4.737z"/>
+	<path d="m195.32 162.49c0 9.103-6.895 16.549-15.323 16.549s-15.324-7.446-15.324-16.549v-142.34c0-9.102 6.896-16.549 15.324-16.549 8.429 0 15.323 7.447 15.323 16.549v142.34z"/>
+      {/* <metadata><rdf:RDF><cc:Work><dc:format>image/svg+xml</dc:format><dc:type rdfResource="http://purl.org/dc/dcmitype/StillImage" /><cc:license rdfResource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:publisher><cc:Agent rdfAbout="http://openclipart.org/"><dc:title>Openclipart</dc:title></cc:Agent></dc:publisher></cc:Work>
+        <cc:License rdfAbout="http://creativecommons.org/licenses/publicdomain/"><cc:permits rdfResource="http://creativecommons.org/ns#Reproduction" />
+          <cc:permits rdfResource="http://creativecommons.org/ns#Distribution" /><cc:permits rdfResource="http://creativecommons.org/ns#DerivativeWorks" />
+  </cc:License></rdf:RDF></metadata> */}
+        </svg>
   ];
   
   const count = [

@@ -56,8 +56,8 @@ function EChart() {
     d['purifier_white']+=data[i][2];
     d['purifier_black']+=data[i][3];
     d['purifier_small']+=data[i][4];
-    d['dryer']+=data[i][5];
-    d['heater']+=data[i][6];
+    d['heater']+=data[i][5];
+    d['dryer']+=data[i][6];
   }
   // d['pot'] = d['pot'].toFixed(2);
   // d['purifier_white']= d['purifier_white'].toFixed(2);
